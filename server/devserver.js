@@ -9,6 +9,8 @@ var express = require('express'),
     config = require('./config'),
     httpProxy = require('http-proxy'),
     app = module.exports = express(),
+    os=require('os'),
+
     proxy = new httpProxy.createProxyServer({});
 
 proxy.on('error', function() {
@@ -117,6 +119,10 @@ if (app.locals.config.useHttps) {
 } else {
   server = http.createServer(app);
 }
-server.listen(process.env.PORT, function() {
-  console.log('Express server listening on ' + process.env.PORT);
+
+
+console.log("os.networkInterfaces() " , os.networkInterfaces())
+
+server.listen(process.env.PORT, "0.0.0.0", function() {
+  console.log('YYYExpress server listening on ' + process.env.PORT);
 });
